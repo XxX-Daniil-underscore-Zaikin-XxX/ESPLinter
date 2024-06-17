@@ -63,43 +63,17 @@ class Program
             }
         }
 
-        /*foreach (var keyworded in mod.EnumerateMajorRecords<IKeyworded<IKeyword>>())
-        {
-            var keywords = keyworded.Keywords;
-            if (keywords == null || !keywords.Any())
-            {
-                continue;
-            }
-            keywords.Sort();
-        }*/
         var writeParams = new BinaryWriteParameters()
         {
-            ModKey = ModKeyOption.CorrectToPath,
-            
-
+            ModKey = ModKeyOption.CorrectToPath
         };
         mod.WriteToBinary(
             command.OutputPath,
             writeParams);
     }
 
-/*    static void LintMod<TMod>(GameRelease gameRelease, ModPath inputPath)
-        where TMod : IModDisposeGetter
-    {
-        using TMod importedMod = ModInstantiator<TMod>.Importer(inputPath, gameRelease);
-        //using var readOnlyInputMod = SkyrimMod.CreateFromBinaryOverlay(inputPath, SkyrimRelease.SkyrimSE);
-        foreach (var gamer in importedMod.EnumerateMajorRecords<IScripted>)
-    }
-*/
-
     static void HandleParseError(IEnumerable<Error> errors)
     {
-        /*var logger = LoggerSetup.Logger;
-        foreach (var error in errors)
-        {
-            logger.Error(error);
-            Console.Error.WriteLine(error);
-        }*/
         var sentenceBuilder = SentenceBuilder.Create();
         var logger = LoggerSetup.Logger;
         foreach (var error in errors)
