@@ -21,16 +21,24 @@ namespace ESPLinter
         [Option('o', "OutputPath", HelpText = "Path to export the linted plugin. Leave blank to overwrite input", Required = false)]
         public string OutputPath { get; set; } = string.Empty;
 
-        [Option('r', "GameRelease", HelpText = "The game release to target. Required.", Required = true)]
+        [Option('r', "GameRelease", HelpText = "The game release to target. Required.", Required = false)]
         public GameRelease Release { get; set; }
 
-        [Option('v', "Verbose", HelpText = "Display each processed record. Off by default", Required = false)]
-        public bool Verbose { get; set; } = false;
+        public LintCommand(string inputFile, string outputFile, GameRelease? release)
+        {
+            this.OutputPath = outputFile;
+            this.InputPath = inputFile;
+            if (release != null)
+            {
+                this.Release = GameRelease.SkyrimSE;
+            }
+        }
 
-        [Option("DryRun", HelpText = "Setting to true prevents this program from modifying the plugin. false by default", Required = false)]
-        public bool DryRun { get; set; } = false;
-
-        [Option('p', "Pedantic", HelpText = "Fail on warnings. false by default", Required = false)]
-        public bool Pedantic { get; set; } = false;
+        public LintCommand()
+        {
+            this.InputPath = string.Empty;
+            this.OutputPath= string.Empty;
+            this.Release = GameRelease.SkyrimSE;
+        }
     }
 }

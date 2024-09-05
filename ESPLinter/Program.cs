@@ -42,7 +42,7 @@ class Program
     {
         var mod = SkyrimMod.CreateFromBinary(
             ModPath.FromPath(command.InputPath),
-            command.Release.ToSkyrimRelease());
+            release: command.Release.ToSkyrimRelease());
         
         ILinkCache scriptLinkCache = mod.ToMutableLinkCache();
 
